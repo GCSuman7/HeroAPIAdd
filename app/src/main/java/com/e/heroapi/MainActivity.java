@@ -21,6 +21,9 @@ import java.io.File;
 
 import API.HeroesAPI;
 import model.Heroes;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -127,6 +130,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private void SaveImageOnly(){
         File file = new File(imagePath);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("imageFile",file.getName(),requestBody);
+
+        HeroesAPI heroesAPI = Url.getInstance().create(HeroesAPI.class);
     }
 
 }
